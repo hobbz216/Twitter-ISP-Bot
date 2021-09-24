@@ -7,7 +7,7 @@ TWITTER_URL = 'https://twitter.com/i/flow/login'
 PROMISED_DOWN = 100
 PROMISED_UP = 100
 
-
+#Chrome is browser used in program but driver for preferred browser will have to be downloaded and saved to desire file path.
 linux_chrome_driver_path = '/home/cal/Developer/chromedriver'
 #win_chrome_driver_path = 'C:\Developer\chromedriver.exe'
 
@@ -15,6 +15,7 @@ class InternetSpeedTwitterBot:
 """Identify current Interent Speeds on home network, sign-in to Twitter and Tweet ISP Provider"""
 
     def __init__(self, driver_path):
+        #Using Chrome browser for program.  Different web browser would have to be named for webdriver method below if not using Chrome.
         self.driver = webdriver.Chrome(driver_path)
         self.down = 0
         self.up = 0
@@ -62,6 +63,7 @@ class InternetSpeedTwitterBot:
 
 test = InternetSpeedTwitterBot(linux_chrome_driver_path)
 test.get_internet_speed()
+#actual contracted speed will vary, consult your ISP contract.  Mine is 50/50 but used 100/100 for testing purposes to ensure the program operates properly.
 if float(test.down) < 100 or float(test.up) < 100:
     #Excluded actual ISP Provider's Twitter handle but can be added within Tweet below.
     ISP_TWEET = f"Hey internet provider, why is my download speed at {test.down} mbps and my upload speed at " \
