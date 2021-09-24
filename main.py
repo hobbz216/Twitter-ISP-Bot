@@ -12,6 +12,7 @@ linux_chrome_driver_path = '/home/cal/Developer/chromedriver'
 #win_chrome_driver_path = 'C:\Developer\chromedriver.exe'
 
 class InternetSpeedTwitterBot:
+"""Identify current Interent Speeds on home network, sign-in to Twitter and Tweet ISP Provider"""
 
     def __init__(self, driver_path):
         self.driver = webdriver.Chrome(driver_path)
@@ -33,6 +34,7 @@ class InternetSpeedTwitterBot:
         time.sleep(5)
         sign_in = self.driver.find_element_by_xpath('//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]'
                                                     '/div/div/div[2]/div[2]/div[1]/div/div[2]/label/div/div[2]/div/input')
+        #TWITTER_USER & TWITTER_PW saved as environment variables
         sign_in.send_keys(TWITTER_USER)
         next = self.driver.find_element_by_xpath('//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/'
                                                  'div[2]/div[2]/div[2]/div/div')
@@ -61,6 +63,7 @@ class InternetSpeedTwitterBot:
 test = InternetSpeedTwitterBot(linux_chrome_driver_path)
 test.get_internet_speed()
 if float(test.down) < 100 or float(test.up) < 100:
+    #Excluded actual ISP Provider's Twitter handle but can be added within Tweet below.
     ISP_TWEET = f"Hey internet provider, why is my download speed at {test.down} mbps and my upload speed at " \
                 f"{test.up} mbps when I'm paying for {PROMISED_DOWN} mbps DL/{PROMISED_UP} mbps ul?"
     test.tweet_at_provider()
